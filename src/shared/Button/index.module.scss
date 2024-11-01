@@ -1,0 +1,17 @@
+@import '../../app/g-styles';
+
+.btnDefault{
+    padding: $padding-btn;
+    background-color: $main-color;
+    border: none;
+    border-radius: $main-b-radius;
+    color: $light-color;
+}
+
+.btnDefault:hover{
+    background-color: #5b55e1;
+}
+
+.btnDefault:active{
+    background-color: #5a54d9;
+}

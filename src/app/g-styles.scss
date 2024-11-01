@@ -1,0 +1,44 @@
+
+//variables
+//colors
+$main-color:#645EE3;
+$second-color: #2751de;
+$accent-color:#FF7A1A;
+$white-color:#FFFFFF;
+$light-color: #efeff3;
+
+//radius
+$main-b-radius: 7px;
+
+//spaces
+$main-padding: 20px 50px;
+$padding-btn: 8px 20px;
+
+
+
+
+//table
+table{
+    width: 100%;
+    margin-top: 3%;
+}
+
+th{
+    background-color: $main-color;
+    color: white;
+}
+
+tr{
+    width: 100%;
+    background-color: $light-color;
+}
+
+tr:hover{
+    background-color: #f6f6fc;
+}
+
+
+td{
+    text-align: center;
+    padding: 10px;
+}

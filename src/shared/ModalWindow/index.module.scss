@@ -1,0 +1,26 @@
+@import '../../app/g-styles';
+
+
+.modal{
+    width: 500px;
+    height: 200px;
+    background-color: $main-color;
+    color: $white-color;
+    padding: 30px;
+}
+
+.btnContainer{
+    margin-top: 30px;
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.close{
+    display: none;
+}
+
+.open{
+    display: block;
+}

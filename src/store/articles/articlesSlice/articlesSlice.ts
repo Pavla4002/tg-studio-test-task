@@ -1,23 +1,26 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import {strict} from "assert";
 
 const apiUrl = 'http://localhost:8000/api/articles';
 
 export const fetchArticles = createAsyncThunk<Article[], void>(
     'articles/fetchArticles',
     async () => {
-        const response = await axios.get(apiUrl); // AJAX-запрос
-        console.log(response.data)
-        return response.data; // Возвращаем данные
+        const response = await axios.get(apiUrl);
+        return response.data;
     }
 );
 
-export const fetchArticleById = createAsyncThunk('articles/fetchArticleById', async (id) => {
-    const response = await axios.get(`${apiUrl}/${id}`);
-    return response.data; // Возвращаем данные
-});
+export const fetchArticleById = createAsyncThunk<Article, number>(
+    'articles/fetchArticleById',
+    async (id) => {
+        const response = await axios.get(`${apiUrl}/${id}`);
+        return response.data;
+    }
+);
 
-interface Article {
+export interface Article {
     id: number;
     author_id: number;
     title: string;
@@ -28,13 +31,13 @@ interface Article {
     };
 }
 
-interface ArticlesState {
+interface AppState {
     articles: Article[];
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
     error: string | null;
 }
 
-const initialState: ArticlesState = {
+const initialState: AppState = {
     articles: [],
     status: 'idle',
     error: null,
@@ -54,6 +57,17 @@ const articlesSlice = createSlice({
                 state.articles = action.payload;
             })
             .addCase(fetchArticles.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error.message || 'Error occurred';
+            })
+            .addCase(fetchArticleById.pending, (state) => {
+                    state.status = 'loading';
+                })
+            .addCase(fetchArticleById.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.articles = Array(action.payload);
+            })
+            .addCase(fetchArticleById.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message || 'Error occurred';
             });
