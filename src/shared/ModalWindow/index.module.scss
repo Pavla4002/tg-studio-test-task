@@ -7,6 +7,23 @@
     background-color: $main-color;
     color: $white-color;
     padding: 30px;
+    margin-top: 50px;
+    position: relative;
+}
+
+.closeModalBlock{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.textCloseBtn{
+    font-size: 12px;
+    color: $light-color;
+}
+
+.title{
+    font-size: 16px;
 }
 
 .btnContainer{
@@ -24,3 +41,4 @@
 .open{
     display: block;
 }
+

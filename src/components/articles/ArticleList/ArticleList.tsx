@@ -1,22 +1,22 @@
-import React, {MouseEventHandler, useEffect, useRef, useState} from 'react';
-import {useSelector } from 'react-redux';
-import { useAppDispatch } from '../../../hooks/hooks';
-import {fetchArticles} from '../../../store/articles/articlesSlice/articlesSlice';
+import React, { useEffect} from 'react';
+import {useAppDispatch, useAppSelector} from '../../../hooks/hooks';
+import {Article, fetchArticles, openModal} from '../../../store/articles/articlesSlice/articlesSlice';
 import { RootState } from '../../../store/store';
 import Button from "../../../shared/Button";
 import styles from './index.module.scss';
 import '../../../app/g-styles.scss';
 import ButtonLink from "../../../shared/ButtonLink/ButtonLink";
 import ModalWindow from "../../../shared/ModalWindow";
-import {openModal} from "../../../store/articles/ModalSlice/ModalSlice";
+
+
 
 
 const ArticleList: React.FC = () => {
     const dispatch = useAppDispatch();
-    const articles = useSelector((state: RootState) => state.articles.articles);
-    const articleStatus = useSelector((state: RootState) => state.articles.status);
-    const statusModal = useSelector((state: RootState) => state.modal.isOpen);
-    const textModal = useSelector((state: RootState) => state.modal.text);
+    const articles = useAppSelector((state: RootState) => state.articles.articles);
+    const articleStatus = useAppSelector((state: RootState) => state.articles.status);
+    const statusModal = useAppSelector((state: RootState) => state.articles.isOpenModal);
+    const articleModal = useAppSelector((state: RootState) => state.articles.articleModal);
     console.log(statusModal)
     console.log(articles)
     useEffect(() => {
@@ -25,11 +25,9 @@ const ArticleList: React.FC = () => {
         }
     }, [articleStatus, dispatch]);
 
-
-    const openCloseModal = (textModal:string) => {
-        dispatch(openModal(textModal)); // Измените статус модалки
+    const openModalFunc = (article: Article) => {
+        dispatch(openModal(article));
     };
-
 
     return (
         <>
@@ -56,7 +54,7 @@ const ArticleList: React.FC = () => {
                                 <td>{article.title}</td>
                                 <td className={styles.tdBtns}>
                                     <ButtonLink link={`/article/${article.id}`}>Редактировать</ButtonLink>
-                                    <Button type={"button"} onClick={()=>openCloseModal(article.title)} article={article}>Удалить</Button>
+                                    <Button type={"button"} onClick={()=>openModalFunc(article)} article={article}>Удалить</Button>
                                 </td>
                             </tr>
                         ))}
@@ -68,10 +66,9 @@ const ArticleList: React.FC = () => {
             }
 
             {statusModal && (
-                <ModalWindow titleArticle={textModal} status={statusModal}/>
+                <ModalWindow articleModal={articleModal} status={statusModal}/>
             )}
         </>
-
     );
 };
 

@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import {strict} from "assert";
+
 
 const apiUrl = 'http://localhost:8000/api/articles';
 
@@ -35,18 +35,31 @@ interface AppState {
     articles: Article[];
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
     error: string | null;
+    isOpenModal: boolean;
+    articleModal: Article | null;
 }
 
 const initialState: AppState = {
     articles: [],
     status: 'idle',
     error: null,
+    isOpenModal: false,
+    articleModal: null,
 };
 
 const articlesSlice = createSlice({
     name: 'articles',
     initialState,
-    reducers: {},
+    reducers: {
+        openModal: (state, action) => {
+            state.isOpenModal = true;
+            state.articleModal = action.payload; // Устанавливаем текст модалки при открытии
+        },
+        closeModal: (state) => {
+            state.isOpenModal = false;
+            state.articleModal = null; // Сбрасываем текст при закрытии
+        },
+    },
     extraReducers: (builder) => {
         builder
             .addCase(fetchArticles.pending, (state) => {
@@ -75,3 +88,4 @@ const articlesSlice = createSlice({
 });
 
 export default articlesSlice.reducer;
+export const { openModal, closeModal} = articlesSlice.actions;
