@@ -1,0 +1,9 @@
+@import "../../../app/g-styles";
+
+.tdBtns{
+    display: grid;
+    grid-template-columns: repeat(2,150px);
+    justify-content: center;
+    grid-column-gap: 20px;
+}
+

@@ -1,0 +1,28 @@
+@import '../../app/g-styles';
+
+.errorArea{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.errorContent{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    border-radius: $main-b-radius;
+    background-color: $light-color;
+}
+
+.errorContent span{
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.image{
+    width: 100px;
+    height: 100px;
+}

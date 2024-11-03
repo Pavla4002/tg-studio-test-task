@@ -20,6 +20,15 @@ export const fetchArticleById = createAsyncThunk<Article, number>(
     }
 );
 
+export const deleteArticleById = createAsyncThunk<number, number>(
+    'articles/deleteArticleById',
+    async (id) => {
+        const response = await axios.delete(`${apiUrl}/${id}`);
+        console.log(response.data);
+        return id;
+    }
+);
+
 export interface Article {
     id: number;
     author_id: number;
@@ -75,12 +84,23 @@ const articlesSlice = createSlice({
             })
             .addCase(fetchArticleById.pending, (state) => {
                     state.status = 'loading';
-                })
+            })
             .addCase(fetchArticleById.fulfilled, (state, action) => {
                 state.status = 'succeeded';
                 state.articles = Array(action.payload);
             })
             .addCase(fetchArticleById.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error.message || 'Error occurred';
+            })
+            .addCase(deleteArticleById.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(deleteArticleById.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.articles = state.articles.filter(article => article.id!==action.payload)
+            })
+            .addCase(deleteArticleById.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message || 'Error occurred';
             });

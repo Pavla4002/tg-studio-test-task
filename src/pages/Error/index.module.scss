@@ -1,0 +1,26 @@
+@import "../../app/g-styles";
+
+.errorPage{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30vh;
+}
+.errorPageContent span{
+    color: $main-color;
+}
+
+.errorPageContent h2{
+    color: $main-color;
+}
+
+.errorPageContent{
+    background-color: $light-color;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    border-radius: $main-b-radius;
+}

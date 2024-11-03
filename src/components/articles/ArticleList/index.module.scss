@@ -33,3 +33,12 @@
     justify-content: space-between;
     align-items: center;
 }
+
+.noDataBlock{
+    margin-top: 5%;
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $light-color;
+}

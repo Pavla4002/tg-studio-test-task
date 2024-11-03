@@ -1,0 +1,18 @@
+@import '../../app/g-styles';
+
+.loadArea{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loadContent{
+    background-color: $light-color;
+    padding: 30px;
+    border-radius: $main-b-radius;
+}
+
+.loading{
+    font-size: 18px;
+}
