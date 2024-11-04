@@ -4,6 +4,8 @@ import Button from "../../../shared/Button";
 import {useAppDispatch} from "../../../hooks/hooks";
 import {Article, openModal} from "../../../store/articles/articlesSlice/articlesSlice";
 import '../../../app/g-styles.scss';
+import React from "react";
+import {Link} from "react-router-dom";
 
 interface ArticlesTableProps {
     articles: Article[],
@@ -29,7 +31,7 @@ function ArticlesTable({articles}:ArticlesTableProps) {
                     <tr key={article.id}>
                         <td>{article.id}</td>
                         <td>{article.author?.name}</td>
-                        <td><a className={styles.linkArticle} href={`/article/${article.id}`}>{article.title}</a></td>
+                        <td><Link to={`/article/${article.id}`} className={styles.linkArticle}>{article.title}</Link></td>
                         <td className={styles.tdBtns}>
                             <ButtonLink link={`/article/edit/${article.id}`}>Редактировать</ButtonLink>
                             <Button type={"button"} onClick={()=>openModalFunc(article)} article={article}>Удалить</Button>

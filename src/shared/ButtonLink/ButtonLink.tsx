@@ -1,5 +1,6 @@
 import React, {FC, ReactNode} from 'react';
 import styles from './index.module.scss';
+import {Link} from "react-router-dom";
 
 interface ButtonLinkProps{
     children: ReactNode;
@@ -8,7 +9,7 @@ interface ButtonLinkProps{
 
 const  ButtonLink : FC<ButtonLinkProps> = ({children,link}) => {
     return (
-        <a href={link} className={styles.link}>{children}</a>
+        <Link to={link} className={styles.link}>{children}</Link>
     );
 }
 

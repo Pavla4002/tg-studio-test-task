@@ -3,3 +3,16 @@
 .layout{
     padding: 70px 100px;
 }
+
+.demoMessage{
+    margin-right: 20px;
+}
+
+.demoBox{
+    display: flex;
+    height: 50px;
+    justify-content: end;
+    background: $light-color;
+    align-items: center;
+    padding: 0 30px;
+}

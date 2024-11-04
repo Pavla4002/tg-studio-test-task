@@ -20,8 +20,8 @@ function EditArticle() {
     const articleStatus = useAppSelector((state: RootState) => state.articles.status);
     const error = useAppSelector((state: RootState) => state.articles.error);
     const message = useAppSelector((state: RootState) => state.articles.editMessage);
-    const article = useSelector((state: RootState) =>
-        state.articles.articles.find(a => a.id === Number(id))
+    const article = useAppSelector((state: RootState) =>
+        state.articles.article
     );
 
     useEffect(() => {

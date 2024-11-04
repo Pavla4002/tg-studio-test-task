@@ -7,18 +7,20 @@ import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
 import {RootState} from "../../store/store";
 import {clearMessages} from "../../store/articles/articlesSlice/articlesSlice";
 import Message from "../../shared/Message";
+import {clearMessagesDemo} from "../../store/articles/demo/demoSlice";
 function AddArticle() {
     const dispatch = useAppDispatch();
-    let messageAdd = useAppSelector((state:RootState) => state.articles.addMessage);
-    const statusAdd = useAppSelector((state:RootState) => state.articles.status);
+    const demoStatus = useAppSelector((state:RootState) => state.demo.demo);
+    const articlesDemo = useAppSelector((state:RootState) => state.demo.articles);
+    let messageAdd = useAppSelector((state:RootState) => demoStatus ? state.demo.addMessage : state.articles.addMessage);
 
     useEffect(() => {
         setTimeout(()=>{
-            setTimeout(()=>{
-                dispatch(clearMessages());
-            },5000)
-        },4000)
-    }, [statusAdd,messageAdd]);
+            dispatch(clearMessages());
+            dispatch(clearMessagesDemo())
+        },5000)
+    }, [messageAdd]);
+
     return (
         <Layout>
             <div className="">
@@ -27,9 +29,17 @@ function AddArticle() {
             <div className={styles.btnLink}>
                 <ButtonLink link={'/'}>Все статьи</ButtonLink>
             </div>
-            <div className={styles.formArea}>
-                <From />
-            </div>
+            {
+                articlesDemo.length<3 ?
+                    <div className={styles.formArea}>
+                        <From />
+                    </div>
+                :
+                    <div>
+                        В режиме "Демо" можно создать лишь 3 статьи.
+                    </div>
+            }
+
         </Layout>
     );
 }

@@ -36,6 +36,7 @@ const ModalWindow : FC<ModalWindowProps> = ({articleModal, status=false}) => {
                 <h5 className={styles.title}>Вы уверены, что хотите удалить статью "{articleModal?.title}"?</h5>
                 <div className={styles.btnContainer}>
                     <Button type={"button"} onClick={deleteArticle}>Да</Button>
+                    <span>/</span>
                     <Button type={"button"} onClick={closeModalFunc}>Нет</Button>
                 </div>
             </div>

@@ -6,18 +6,20 @@ import {RootState} from "../../store/store";
 import {fetchAuthors} from "../../store/articles/articlesSlice/authorSlice";
 import styles from './index.module.scss'
 import Button from "../Button";
+import {addArticleDemo} from "../../store/articles/demo/demoSlice";
 
 interface FromProps{
     article?: Article,
 }
 const From : FC<FromProps> = ({article}) => {
     const dispatch = useAppDispatch();
+    const demoStatus = useAppSelector((state:RootState) => state.demo.demo);
     const authors = useAppSelector((state:RootState) => state.authors.authors);
     const { control, handleSubmit, setValue, reset} = useForm<{title:string, text?: string, author_id: string}>({
         defaultValues: {
             title: '',
             text: '',
-            author_id: '0',
+            author_id: undefined,
         },
     });
     console.log(article)
@@ -34,13 +36,20 @@ const From : FC<FromProps> = ({article}) => {
     }, []);
 
     const onSubmit: SubmitHandler<{ title: string; text?: string, author_id: string }> = (data) => {
-        if (article) {
-            dispatch(editArticle({ id:article.id, title:data.title, text:data.text, author_id: Number(data.author_id) }));
-        } else {
-            dispatch(addArticle({title:data.title, text:data.text, author_id: Number(data.author_id)}));
-            reset({ title: '', text: '', author_id: '0' });
+        if (!demoStatus){
+            if (article) {
+                dispatch(editArticle({ id:article.id, title:data.title, text:data.text, author_id: Number(data.author_id) }));
+            } else {
+                dispatch(addArticle({title:data.title, text:data.text, author_id: Number(data.author_id)}));
+                reset({ title: '', text: '', author_id: '0' });
+            }
+        }else{
+            const author = authors.find(author => author.id === Number(data.author_id));
+            dispatch(addArticleDemo(
+                {id:Date.now(),title:data.title, text:data.text, author_id: Number(data.author_id), author: {id: Number(data.author_id), name: author!.name}}));
+                reset({ title: '', text: '', author_id: '0' });
         }
-    };
+    }
 
     return (
         <div className={styles.formBox}>
@@ -75,8 +84,8 @@ const From : FC<FromProps> = ({article}) => {
                         control={control}
                         rules={{ required: true }}
                         render={({ field }) => (
-                            <select {...field} className={styles.elForm}>
-                                <option value="0" disabled >Select an author</option>
+                            <select {...field} className={styles.elForm} value={field.value || ""}>
+                                <option value="" disabled>Выберите автора</option>
                                 {authors.map((author) => (
                                     <option key={author.id} value={author.id}>
                                         {author.name}

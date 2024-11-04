@@ -60,6 +60,7 @@ export interface Article {
 
 interface AppState {
     articles: Article[];
+    article : Article | null;
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
     error: string | null;
     isOpenModal: boolean;
@@ -71,6 +72,7 @@ interface AppState {
 
 const initialState: AppState = {
     articles: [],
+    article: null,
     status: 'idle',
     error: null,
     isOpenModal: false,
@@ -112,11 +114,11 @@ const articlesSlice = createSlice({
                 state.error = action.error.message || 'Error occurred';
             })
             .addCase(fetchArticleById.pending, (state) => {
-                    state.status = 'loading';
+                state.status = 'loading';
             })
             .addCase(fetchArticleById.fulfilled, (state, action) => {
                 state.status = 'succeeded';
-                state.articles = Array(action.payload);
+                state.article = action.payload;
             })
             .addCase(fetchArticleById.rejected, (state, action) => {
                 state.status = 'failed';
@@ -127,7 +129,7 @@ const articlesSlice = createSlice({
             })
             .addCase(deleteArticleById.fulfilled, (state, action) => {
                 state.status = 'succeeded';
-                state.articles = state.articles.filter(article => article.id!== Number(action.payload))
+                state.articles = state.articles .filter(article => article.id!== Number(action.payload))
                 state.delMessage = 'Статья успешно удалена';
             })
             .addCase(deleteArticleById.rejected, (state, action) => {

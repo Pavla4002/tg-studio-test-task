@@ -14,8 +14,8 @@ const ArticleDetail: React.FC = () => {
     const dispatch = useAppDispatch();
     const articleStatus = useAppSelector((state: RootState) => state.articles.status);
     const message= useAppSelector((state: RootState) => state.articles.error);
-    const article = useSelector((state: RootState) =>
-        state.articles.articles.find(a => a.id === Number(id))
+    const article = useAppSelector((state: RootState) =>
+        state.articles.article
     );
 
     useEffect(() => {
