@@ -1,8 +1,8 @@
-import React, {FC} from 'react';
+import React, {FC, ReactNode} from 'react';
 import styles from './index.module.scss';
 
 interface ButtonLinkProps{
-    children: string;
+    children: ReactNode;
     link: string;
 }
 

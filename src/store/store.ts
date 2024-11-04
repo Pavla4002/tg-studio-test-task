@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import articlesReducer from './articles/articlesSlice/articlesSlice';
+import authorSlice from "./articles/articlesSlice/authorSlice";
 
 const store = configureStore({
     reducer: {
         articles: articlesReducer,
+        authors: authorSlice
     },
 });
 

@@ -1,8 +1,14 @@
-import React, {FC, useEffect} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import styles from './index.module.scss';
 import Button from "../Button";
 import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
-import {Article, closeModal, deleteArticleById, fetchArticles} from "../../store/articles/articlesSlice/articlesSlice";
+import {
+    Article,
+    clearMessages,
+    closeModal,
+    deleteArticleById,
+    fetchArticles
+} from "../../store/articles/articlesSlice/articlesSlice";
 import {RootState} from "../../store/store";
 
 
@@ -12,7 +18,6 @@ interface ModalWindowProps {
 }
 const ModalWindow : FC<ModalWindowProps> = ({articleModal, status=false}) => {
     const dispatch = useAppDispatch();
-    // const articleStatus = useAppSelector((state: RootState) => state.articles);
 
     const closeModalFunc = () => {
         dispatch(closeModal());

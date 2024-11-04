@@ -1,0 +1,30 @@
+@import '../../app/g-styles';
+
+.elForm{
+    width: 400px;
+    height: 30px;
+    border-radius: $main-b-radius;
+    border: 1px solid $main-color;
+}
+
+.field{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.formBox{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 600px;
+    height: 50vh;
+    padding: 20px;
+    background-color: $main-color;
+    border-radius: $main-b-radius;
+    color: $white-color;
+}
+
+.btn{
+    margin-top: 30px;
+}

@@ -24,10 +24,21 @@ export const deleteArticleById = createAsyncThunk<number, number>(
     'articles/deleteArticleById',
     async (id) => {
         const response = await axios.delete(`${apiUrl}/${id}`);
-        console.log(response.data);
-        return id;
+        return response.data;
     }
 );
+
+export const addArticle = createAsyncThunk<number, { title: string; text?:string, author_id: number }>(
+    'articles/addArticle',
+    async (article) => {
+        console.log(article)
+        const response = await axios.post(apiUrl,article);
+        console.log(response.data)
+        return response.data;
+    }
+);
+
+
 
 export interface Article {
     id: number;
@@ -46,6 +57,9 @@ interface AppState {
     error: string | null;
     isOpenModal: boolean;
     articleModal: Article | null;
+    delMessage: string;
+    addMessage: string;
+    editMessage: string;
 }
 
 const initialState: AppState = {
@@ -54,6 +68,9 @@ const initialState: AppState = {
     error: null,
     isOpenModal: false,
     articleModal: null,
+    delMessage: '',
+    addMessage: '',
+    editMessage:'',
 };
 
 const articlesSlice = createSlice({
@@ -62,11 +79,16 @@ const articlesSlice = createSlice({
     reducers: {
         openModal: (state, action) => {
             state.isOpenModal = true;
-            state.articleModal = action.payload; // Устанавливаем текст модалки при открытии
+            state.articleModal = action.payload;
         },
         closeModal: (state) => {
             state.isOpenModal = false;
-            state.articleModal = null; // Сбрасываем текст при закрытии
+            state.articleModal = null;
+        },
+        clearMessages: (state) => {
+            state.delMessage = '';
+            state.addMessage = '';
+            state.editMessage = '';
         },
     },
     extraReducers: (builder) => {
@@ -99,8 +121,20 @@ const articlesSlice = createSlice({
             .addCase(deleteArticleById.fulfilled, (state, action) => {
                 state.status = 'succeeded';
                 state.articles = state.articles.filter(article => article.id!==action.payload)
+                state.delMessage = 'Статья успешно удалена';
             })
             .addCase(deleteArticleById.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error.message || 'Error occurred';
+                state.delMessage = action.error.message ||'Error occurred';
+            })
+            .addCase(addArticle.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(addArticle.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+            })
+            .addCase(addArticle.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message || 'Error occurred';
             });
@@ -108,4 +142,4 @@ const articlesSlice = createSlice({
 });
 
 export default articlesSlice.reducer;
-export const { openModal, closeModal} = articlesSlice.actions;
+export const { openModal, closeModal, clearMessages} = articlesSlice.actions;

@@ -1,6 +1,6 @@
 import React, { useEffect} from 'react';
 import {useAppDispatch, useAppSelector} from '../../../hooks/hooks';
-import {Article, fetchArticles, openModal} from '../../../store/articles/articlesSlice/articlesSlice';
+import {Article, clearMessages, fetchArticles, openModal} from '../../../store/articles/articlesSlice/articlesSlice';
 import { RootState } from '../../../store/store';
 import Button from "../../../shared/Button";
 import styles from './index.module.scss';
@@ -9,6 +9,8 @@ import ModalWindow from "../../../shared/ModalWindow";
 import Error from "../../../shared/Error";
 import Load from "../../../shared/Loading";
 import ArticlesTable from "../ArticlesTable";
+import Message from "../../../shared/Message";
+import ButtonLink from "../../../shared/ButtonLink/ButtonLink";
 
 
 
@@ -20,15 +22,22 @@ const ArticleList: React.FC = () => {
     const message= useAppSelector((state: RootState) => state.articles.error);
     const statusModal = useAppSelector((state: RootState) => state.articles.isOpenModal);
     const articleModal = useAppSelector((state: RootState) => state.articles.articleModal);
+    const delMessage = useAppSelector((state: RootState) => state.articles.delMessage);
+
+
     useEffect(() => {
         if (articleStatus === 'idle') {
             dispatch(fetchArticles());
         }
     }, [articleStatus, dispatch]);
 
-    const openModalFunc = (article: Article) => {
-        dispatch(openModal(article));
-    };
+
+    useEffect(() => {
+        setTimeout(()=>{
+            dispatch(clearMessages());
+        },5000)
+
+    }, [delMessage, dispatch]);
 
     return (
         <>
@@ -36,8 +45,9 @@ const ArticleList: React.FC = () => {
                 <>
                     { articleStatus!=='loading' ?
                         (<div>
+                            {delMessage!=='' && <Message text={delMessage}/>}
                                 <div className={styles.btnContainer}>
-                                    <Button type={"button"}><div className={styles.addArticle}>Создать<span className={styles.smallPlus}>+</span></div></Button>
+                                    <ButtonLink link={'/article/add'} ><div className={styles.addArticle}>Создать<span className={styles.smallPlus}>+</span></div></ButtonLink>
                                     <Button type={"button"}>Демо</Button>
                                 </div>
                                     {articles.length>0 ?
