@@ -6,11 +6,11 @@ import Button from "../../../shared/Button";
 import styles from './index.module.scss';
 import '../../../app/g-styles.scss';
 import ModalWindow from "../../../shared/ModalWindow";
-import Error from "../../../shared/Error";
 import Load from "../../../shared/Loading";
 import ArticlesTable from "../ArticlesTable";
 import Message from "../../../shared/Message";
 import ButtonLink from "../../../shared/ButtonLink/ButtonLink";
+import ErrorMessage from "../../../shared/Error";
 
 
 
@@ -41,7 +41,7 @@ const ArticleList: React.FC = () => {
 
     return (
         <>
-            {articleStatus ==='failed' ? <Error textError={message}/>  :
+            {articleStatus ==='failed' ? <ErrorMessage textError={message}/>  :
                 <>
                     { articleStatus!=='loading' ?
                         (<div>

@@ -33,7 +33,14 @@ export const addArticle = createAsyncThunk<number, { title: string; text?:string
     async (article) => {
         console.log(article)
         const response = await axios.post(apiUrl,article);
-        console.log(response.data)
+        return response.data;
+    }
+);
+
+export const editArticle = createAsyncThunk<Article, Article>(
+    'articles/editArticle',
+    async (article) => {
+        const response = await axios.put(`${apiUrl}/${article.id}`,article);
         return response.data;
     }
 );
@@ -120,7 +127,7 @@ const articlesSlice = createSlice({
             })
             .addCase(deleteArticleById.fulfilled, (state, action) => {
                 state.status = 'succeeded';
-                state.articles = state.articles.filter(article => article.id!==action.payload)
+                state.articles = state.articles.filter(article => article.id!== Number(action.payload))
                 state.delMessage = 'Статья успешно удалена';
             })
             .addCase(deleteArticleById.rejected, (state, action) => {
@@ -136,6 +143,17 @@ const articlesSlice = createSlice({
                 state.addMessage = 'Статья успешно добавлена'
             })
             .addCase(addArticle.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error.message || 'Error occurred';
+            })
+            .addCase(editArticle.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(editArticle.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.editMessage = 'Статья успешно обновлена'
+            })
+            .addCase(editArticle.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message || 'Error occurred';
             });

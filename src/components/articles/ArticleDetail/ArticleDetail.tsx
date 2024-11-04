@@ -6,7 +6,8 @@ import { RootState } from '../../../store/store';
 import { useParams } from 'react-router-dom';
 import styles from './index.module.scss';
 import Load from "../../../shared/Loading";
-import Error from "../../../shared/Error";
+import ErrorMessage from "../../../shared/Error";
+
 
 const ArticleDetail: React.FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -42,7 +43,7 @@ const ArticleDetail: React.FC = () => {
                     </>
                     :
                     <>
-                        <Error textError={message}/>
+                        <ErrorMessage textError={message}/>
                     </>
             }
         </>

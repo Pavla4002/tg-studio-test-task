@@ -3,7 +3,7 @@ import styles from './index.module.scss';
 interface ErrorProps{
     textError: string | null;
 }
-const Error : FC<ErrorProps> = ({textError}) => {
+const ErrorMessage : FC<ErrorProps> = ({textError}) => {
     return (
         <div className={styles.errorArea}>
             <div className={styles.errorContent}>
@@ -14,4 +14,4 @@ const Error : FC<ErrorProps> = ({textError}) => {
     );
 }
 
-export default Error;
+export default ErrorMessage;
