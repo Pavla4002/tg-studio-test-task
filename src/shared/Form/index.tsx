@@ -13,7 +13,7 @@ interface FromProps{
 const From : FC<FromProps> = ({article}) => {
     const dispatch = useAppDispatch();
     const authors = useAppSelector((state:RootState) => state.authors.authors);
-    const { control, handleSubmit, setValue} = useForm<{title:string, text?: string, author_id: number}>();
+    const { control, handleSubmit, setValue, reset} = useForm<{title:string, text?: string, author_id: number}>();
 
     useEffect(() => {
         if (article) {
@@ -31,8 +31,8 @@ const From : FC<FromProps> = ({article}) => {
         if (article) {
             // dispatch(updateArticle({ ...data, id: article.id }));
         } else {
-
             dispatch(addArticle({title:data.title, text:data.text, author_id: Number(data.author_id)}));
+            reset({ title: '', text: '', author_id: 0 });
         }
     };
 
@@ -70,7 +70,7 @@ const From : FC<FromProps> = ({article}) => {
                         rules={{ required: true }}
                         render={({ field }) => (
                             <select {...field} className={styles.elForm}>
-                                <option value="" disabled selected defaultValue={"Select an author"}>Select an author</option>
+                                <option value="0" disabled selected defaultValue={"Select an author"}>Select an author</option>
                                 {authors.map((author) => (
                                     <option key={author.id} value={author.id}>
                                         {author.name}

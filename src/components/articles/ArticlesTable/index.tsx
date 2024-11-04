@@ -14,29 +14,32 @@ function ArticlesTable({articles}:ArticlesTableProps) {
         dispatch(openModal(article));
     };
     return (
-        <table>
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Author</th>
-                <th>Title</th>
-                <th style={{width:'400px'}}>Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            {articles.map((article) => (
-                <tr key={article.id}>
-                    <td>{article.id}</td>
-                    <td>{article.author?.name}</td>
-                    <td>{article.title}</td>
-                    <td className={styles.tdBtns}>
-                        <ButtonLink link={`/article/${article.id}`}>Редактировать</ButtonLink>
-                        <Button type={"button"} onClick={()=>openModalFunc(article)} article={article}>Удалить</Button>
-                    </td>
+        <div className={styles.tbContainer}>
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Author</th>
+                    <th>Title</th>
+                    <th style={{width:'400px'}}>Actions</th>
                 </tr>
-            ))}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                {articles.map((article) => (
+                    <tr key={article.id}>
+                        <td>{article.id}</td>
+                        <td>{article.author?.name}</td>
+                        <td><a className={styles.linkArticle} href={`/article/${article.id}`}>{article.title}</a></td>
+                        <td className={styles.tdBtns}>
+                            <ButtonLink link={`/article/edit/${article.id}`}>Редактировать</ButtonLink>
+                            <Button type={"button"} onClick={()=>openModalFunc(article)} article={article}>Удалить</Button>
+                        </td>
+                    </tr>
+                ))}
+                </tbody>
+            </table>
+        </div>
+
     );
 }
 

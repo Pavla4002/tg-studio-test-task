@@ -133,6 +133,7 @@ const articlesSlice = createSlice({
             })
             .addCase(addArticle.fulfilled, (state, action) => {
                 state.status = 'succeeded';
+                state.addMessage = 'Статья успешно добавлена'
             })
             .addCase(addArticle.rejected, (state, action) => {
                 state.status = 'failed';

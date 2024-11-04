@@ -17,10 +17,9 @@ const ArticleDetail: React.FC = () => {
         state.articles.articles.find(a => a.id === Number(id))
     );
 
-
     useEffect(() => {
         dispatch(fetchArticleById(Number(id)));
-    }, [article, dispatch]);
+    }, []);
 
 
     return (
@@ -32,10 +31,12 @@ const ArticleDetail: React.FC = () => {
                             <Load/>
                         ) : (
                             <div>
-                                <h1>{article.title}</h1>
-                                <p>Author: {article.author?.name}</p>
+                                <div className={styles.titleAuthorRow}>
+                                    <h1 className={styles.title}>{article.title}</h1>
+                                    <p>Author: {article.author?.name}</p>
+                                </div>
+
                                 <p>{article.text}</p>
-                                <a href="/">Back to Articles</a>
                             </div>
                         )}
                     </>

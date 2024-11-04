@@ -20,12 +20,13 @@ $padding-btn: 8px 20px;
 //table
 table{
     width: 100%;
-    margin-top: 3%;
 }
 
 th{
     background-color: $main-color;
     color: white;
+    position: sticky;
+    top: 0;
 }
 
 tr{
@@ -41,3 +42,4 @@ td{
     text-align: center;
     padding: 10px;
 }
+

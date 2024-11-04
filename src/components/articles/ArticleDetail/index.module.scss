@@ -1,1 +1,12 @@
 @import "../../../app/g-styles";
+
+
+.titleAuthorRow{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.title{
+    border-bottom: 3px solid $main-color;
+}

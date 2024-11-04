@@ -55,11 +55,10 @@ const ArticleList: React.FC = () => {
                                         :
                                         <div className={styles.noDataBlock}><span>Нет данных для отображения.</span></div>
                                     }
-                            </div>)
+                        </div>)
                         :
                         (<Load/>)
                     }
-
                     {statusModal && (
                         <ModalWindow articleModal={articleModal} status={statusModal}/>
                     )}
