@@ -79,7 +79,7 @@ const From : FC<FromProps> = ({article}) => {
                         control={control}
                         rules={{ required: true }}
                         render={({ field }) => (
-                            <textarea className={styles.elForm} {...field} style={{resize:'none'}} />
+                            <textarea className={styles.elForm} {...field} style={{resize:'vertical',overflowX: 'hidden'}} />
                         )}
                     />
                 </div>
