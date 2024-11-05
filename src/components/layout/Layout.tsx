@@ -4,6 +4,7 @@ import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
 import {RootState} from "../../store/store";
 import Button from "../../shared/Button";
 import {startEndDemo} from "../../store/articles/demo/demoSlice";
+import {useNavigate} from "react-router-dom";
 
 
 interface LayoutProps {
@@ -14,8 +15,10 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
     const dispatch = useAppDispatch();
     const demoStatus = useAppSelector((state: RootState) => state.demo.demo);
+    const navigate = useNavigate();
     const demo = () =>{
-        dispatch(startEndDemo())
+        dispatch(startEndDemo());
+        navigate('/');
     }
     return (
         <>
