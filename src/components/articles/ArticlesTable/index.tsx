@@ -20,7 +20,7 @@ function ArticlesTable({articles}:ArticlesTableProps) {
             <table>
                 <thead>
                 <tr>
-                    <th>ID</th>
+                    <th style={{width:'100px'}}>ID</th>
                     <th>Author</th>
                     <th>Title</th>
                     <th style={{width:'400px'}}>Actions</th>

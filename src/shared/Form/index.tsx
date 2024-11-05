@@ -6,12 +6,13 @@ import {RootState} from "../../store/store";
 import {fetchAuthors} from "../../store/articles/articlesSlice/authorSlice";
 import styles from './index.module.scss'
 import Button from "../Button";
-import {addArticleDemo} from "../../store/articles/demo/demoSlice";
+import {addArticleDemo, editArticleDemo} from "../../store/articles/demo/demoSlice";
 
 interface FromProps{
     article?: Article,
 }
 const From : FC<FromProps> = ({article}) => {
+    console.log('article',article)
     const dispatch = useAppDispatch();
     const demoStatus = useAppSelector((state:RootState) => state.demo.demo);
     const authors = useAppSelector((state:RootState) => state.authors.authors);
@@ -41,13 +42,18 @@ const From : FC<FromProps> = ({article}) => {
                 dispatch(editArticle({ id:article.id, title:data.title, text:data.text, author_id: Number(data.author_id) }));
             } else {
                 dispatch(addArticle({title:data.title, text:data.text, author_id: Number(data.author_id)}));
-                reset({ title: '', text: '', author_id: '0' });
             }
+            reset({ title: '', text: '', author_id: '0' });
         }else{
-            const author = authors.find(author => author.id === Number(data.author_id));
-            dispatch(addArticleDemo(
-                {id:Date.now(),title:data.title, text:data.text, author_id: Number(data.author_id), author: {id: Number(data.author_id), name: author!.name}}));
-                reset({ title: '', text: '', author_id: '0' });
+            if (article) {
+                const author = authors.find(author => author.id === Number(data.author_id));
+                dispatch(editArticleDemo({ id:article.id, title:data.title, text:data.text, author_id: Number(data.author_id),author: {id: Number(data.author_id), name: author!.name} }));
+            }else{
+                const author = authors.find(author => author.id === Number(data.author_id));
+                dispatch(addArticleDemo(
+                    {id:Date.now(),title:data.title, text:data.text, author_id: Number(data.author_id), author: {id: Number(data.author_id), name: author!.name}}));
+            }
+            reset({ title: '', text: '', author_id: '0' });
         }
     }
 

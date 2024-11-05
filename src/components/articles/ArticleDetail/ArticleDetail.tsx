@@ -12,14 +12,18 @@ import ErrorMessage from "../../../shared/Error";
 const ArticleDetail: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     const dispatch = useAppDispatch();
+    const demoStatus = useAppSelector((state: RootState) => state.demo.demo);
     const articleStatus = useAppSelector((state: RootState) => state.articles.status);
     const message= useAppSelector((state: RootState) => state.articles.error);
     const article = useAppSelector((state: RootState) =>
-        state.articles.article
-    );
+        !demoStatus ?  state.articles.article :  state.demo.articles.find(article => article.id=== Number(id)));
+
+    console.log(article)
 
     useEffect(() => {
-        dispatch(fetchArticleById(Number(id)));
+        if (!demoStatus){
+            dispatch(fetchArticleById(Number(id)));
+        }
     }, []);
 
 

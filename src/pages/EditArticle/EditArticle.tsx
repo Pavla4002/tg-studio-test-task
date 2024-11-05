@@ -13,24 +13,28 @@ import MyError from "../../shared/Error";
 import ErrorMessage from "../../shared/Error";
 import styles from "../AddArticle/index.module.scss";
 import ButtonLink from "../../shared/ButtonLink/ButtonLink";
+import {clearMessagesDemo} from "../../store/articles/demo/demoSlice";
 
 function EditArticle() {
     const { id } = useParams<{ id: string }>();
     const dispatch = useAppDispatch();
+    const demoStatus = useAppSelector((state: RootState) => state.demo.demo);
     const articleStatus = useAppSelector((state: RootState) => state.articles.status);
     const error = useAppSelector((state: RootState) => state.articles.error);
-    const message = useAppSelector((state: RootState) => state.articles.editMessage);
+    const message = useAppSelector((state: RootState) => demoStatus ? state.demo.editMessage : state.articles.editMessage);
     const article = useAppSelector((state: RootState) =>
-        state.articles.article
-    );
+        !demoStatus ?  state.articles.article :  state.demo.articles.find(article => article.id===Number(id)));
 
     useEffect(() => {
-        dispatch(fetchArticleById(Number(id)));
+        if (!demoStatus){
+            dispatch(fetchArticleById(Number(id)));
+        }
     }, []);
 
     useEffect(() => {
         setTimeout(()=>{
             dispatch(clearMessages());
+            dispatch(clearMessagesDemo());
         },4000)
     }, [message]);
 

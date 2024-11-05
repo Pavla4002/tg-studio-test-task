@@ -26,22 +26,35 @@ const demoSlice = createSlice({
     initialState,
     reducers: {
         startEndDemo: (state) => {
+            state.articles = [];
             state.demo = !state.demo;
         },
         addArticleDemo: (state, action: {payload:Article}) => {
-            let oldArr =  state.articles;
-            state.articles = [...state.articles, action.payload];
-            if (state.articles.length!==oldArr.length){
-                state.addMessage ='Статья успешно добавлена'
+            if (state.articles.length<=3){
+                let oldArr =  state.articles;
+                state.articles = [...state.articles, action.payload];
+                if (state.articles.length!==oldArr.length){
+                    state.addMessage ='Статья успешно добавлена'
+                }else{
+                    state.addMessage ='Статья не добавлена'
+                }
             }else{
-                state.addMessage ='Статья не добавлена'
+                state.addMessage ='В режиме "Демо" можно добавить только 3 статьи'
             }
         },
         editArticleDemo: (state, action) => {
-            state.demo = true;
+            const index = state.articles.findIndex(a => a.id === action.payload.id);
+            if (index !== -1) {
+                state.articles[index] = {
+                    ...state.articles[index],
+                    ...action.payload
+                };
+                state.editMessage = 'Статья успешно отредактирована'
+            }
         },
         delArticleDemo: (state, action) => {
-            state.demo = true;
+            state.articles =  state.articles.filter((article)=>article.id!==action.payload);
+            state.delMessage ='Статья удалена';
         },
         clearMessagesDemo: (state) => {
             state.addMessage = '';
@@ -53,4 +66,4 @@ const demoSlice = createSlice({
 });
 
 export default demoSlice.reducer;
-export const {startEndDemo,addArticleDemo,clearMessagesDemo} = demoSlice.actions;
+export const {startEndDemo,addArticleDemo,clearMessagesDemo,delArticleDemo,editArticleDemo} = demoSlice.actions;

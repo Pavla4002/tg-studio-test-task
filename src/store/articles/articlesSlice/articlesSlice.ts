@@ -28,11 +28,11 @@ export const deleteArticleById = createAsyncThunk<number, number>(
     }
 );
 
-export const addArticle = createAsyncThunk<number, { title: string; text?:string, author_id: number }>(
+export const addArticle = createAsyncThunk<Article, { title: string; text?:string, author_id: number }>(
     'articles/addArticle',
     async (article) => {
-        console.log(article)
         const response = await axios.post(apiUrl,article);
+        console.log(response.data)
         return response.data;
     }
 );

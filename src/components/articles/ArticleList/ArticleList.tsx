@@ -11,7 +11,7 @@ import ArticlesTable from "../ArticlesTable";
 import Message from "../../../shared/Message";
 import ButtonLink from "../../../shared/ButtonLink/ButtonLink";
 import ErrorMessage from "../../../shared/Error";
-import {startEndDemo} from "../../../store/articles/demo/demoSlice";
+import {clearMessagesDemo, startEndDemo} from "../../../store/articles/demo/demoSlice";
 
 
 
@@ -19,7 +19,7 @@ import {startEndDemo} from "../../../store/articles/demo/demoSlice";
 const ArticleList: React.FC = () => {
     const dispatch = useAppDispatch();
     const demoStatus = useAppSelector((state: RootState) => state.demo.demo);
-    // const articlesList = useAppSelector((state: RootState) => state.articles.articles);
+    const demoMessageDel = useAppSelector((state: RootState) => state.demo.delMessage);
     const articleStatus = useAppSelector((state: RootState) => state.articles.status);
     const message= useAppSelector((state: RootState) => state.articles.error);
     const statusModal = useAppSelector((state: RootState) => state.articles.isOpenModal);
@@ -39,13 +39,13 @@ const ArticleList: React.FC = () => {
     useEffect(() => {
         setTimeout(()=>{
             dispatch(clearMessages());
+            dispatch(clearMessagesDemo());
         },5000)
 
-    }, [delMessage]);
+    }, [delMessage,demoMessageDel]);
 
     const demo = () =>{
-        console.log('starts')
-        dispatch(startEndDemo())
+        dispatch(startEndDemo());
     }
 
     return (
@@ -54,7 +54,7 @@ const ArticleList: React.FC = () => {
                 <>
                     { articleStatus!=='loading' ?
                         (<div>
-                            {delMessage!=='' && <Message text={delMessage}/>}
+                            {delMessage!=='' || demoMessageDel!=='' && <Message text={demoMessageDel ? demoMessageDel : delMessage}/>}
                                 <div className={styles.btnContainer}>
                                     <ButtonLink link={'/article/add'} ><div className={styles.addArticle}>Создать<span className={styles.smallPlus}>+</span></div></ButtonLink>
                                     <Button type={"button"} onClick={demo}> {!demoStatus ? <span>Демо</span> : <span>Отключить демо</span>}</Button>
