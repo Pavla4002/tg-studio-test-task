@@ -16,7 +16,7 @@ const From : FC<FromProps> = ({article}) => {
     const dispatch = useAppDispatch();
     const demoStatus = useAppSelector((state:RootState) => state.demo.demo);
     const authors = useAppSelector((state:RootState) => state.authors.authors);
-    const { control, handleSubmit, setValue, reset} = useForm<{title:string, text?: string, author_id: string}>({
+    const { control, handleSubmit, setValue, reset,  formState: { errors }} = useForm<{title:string, text?: string, author_id: string}>({
         defaultValues: {
             title: '',
             text: '',
@@ -66,9 +66,13 @@ const From : FC<FromProps> = ({article}) => {
                     <Controller
                         name="title"
                         control={control}
-                        rules={{ required: true }}
+                        rules={{ required: "Field is required"}}
                         render={({ field }) => (
-                            <input className={styles.elForm} type="text" {...field} />
+                            <>
+                                <input className={styles.elForm} type="text" {...field} />
+                                {errors.title && <span style={{color:'black'}}>{errors.title.message}</span>}
+                            </>
+
                         )}
                     />
                 </div>
@@ -77,9 +81,13 @@ const From : FC<FromProps> = ({article}) => {
                     <Controller
                         name="text"
                         control={control}
-                        rules={{ required: true }}
+                        rules={{ required: "Field is required" }}
                         render={({ field }) => (
-                            <textarea className={styles.elForm} {...field} style={{resize:'vertical',overflowX: 'hidden'}} />
+                            <>
+                                <textarea className={styles.elForm} {...field} style={{resize:'vertical',overflowX: 'hidden'}} />
+                                {errors.title && <span style={{color:'black'}}>{errors.title.message}</span>}
+                            </>
+
                         )}
                     />
                 </div>
@@ -88,16 +96,20 @@ const From : FC<FromProps> = ({article}) => {
                     <Controller
                         name="author_id"
                         control={control}
-                        rules={{ required: true }}
+                        rules={{ required: "Field is required"  }}
                         render={({ field }) => (
-                            <select {...field} className={styles.elForm} value={field.value || ""}>
-                                <option value="" disabled>Выберите автора</option>
-                                {authors.map((author) => (
-                                    <option key={author.id} value={author.id}>
-                                        {author.name}
-                                    </option>
-                                ))}
-                            </select>
+                            <>
+                                <select {...field} className={styles.elForm} value={field.value || ""}>
+                                    <option value="" disabled>Выберите автора</option>
+                                    {authors.map((author) => (
+                                        <option key={author.id} value={author.id}>
+                                            {author.name}
+                                        </option>
+                                    ))}
+                                </select>
+                                {errors.title && <span style={{color:'black'}}>{errors.title.message}</span>}
+                            </>
+
                         )}
                     />
                 </div>

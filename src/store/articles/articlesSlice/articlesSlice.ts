@@ -153,6 +153,13 @@ const articlesSlice = createSlice({
             })
             .addCase(editArticle.fulfilled, (state, action) => {
                 state.status = 'succeeded';
+
+                const updatedArticle = action.payload;
+
+                state.articles = state.articles.map(article =>
+                    article.id === updatedArticle.id ? updatedArticle : article
+                );
+
                 state.editMessage = 'Статья успешно обновлена'
             })
             .addCase(editArticle.rejected, (state, action) => {

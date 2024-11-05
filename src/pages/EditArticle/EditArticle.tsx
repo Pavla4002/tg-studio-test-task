@@ -35,7 +35,7 @@ function EditArticle() {
         setTimeout(()=>{
             dispatch(clearMessages());
             dispatch(clearMessagesDemo());
-        },4000)
+        },5000)
     }, [message]);
 
 
