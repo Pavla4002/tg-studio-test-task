@@ -7,6 +7,7 @@ import {fetchAuthors} from "../../store/authors/authorsSlice/authorSlice";
 import styles from './index.module.scss'
 import Button from "../Button";
 import {addArticleDemo, editArticleDemo} from "../../store/demo/demoSlice/demoSlice";
+import Input, {FormDataArticles} from "../Input/Input";
 
 interface FromProps{
     article?: Article,
@@ -15,7 +16,7 @@ const From : FC<FromProps> = ({article}) => {
     const dispatch = useAppDispatch();
     const demoStatus = useAppSelector((state:RootState) => state.demo.demo);
     const authors = useAppSelector((state:RootState) => state.authors.authors);
-    const { control, handleSubmit, setValue, reset,  formState: { errors }} = useForm<{title:string, text?: string, author_id: string}>({
+    const { control, handleSubmit, setValue, reset,  formState: { errors }} = useForm<FormDataArticles>({
         defaultValues: {
             title: '',
             text: '',
@@ -61,33 +62,10 @@ const From : FC<FromProps> = ({article}) => {
             <h4 className="">{!article ? 'Добавление новой статьи' : 'Редактирование статьи'}</h4>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className={styles.field}>
-                    <label>Название:</label>
-                    <Controller
-                        name="title"
-                        control={control}
-                        rules={{ required: "Field is required"}}
-                        render={({ field }) => (
-                            <>
-                                <input className={styles.elForm} type="text" {...field} />
-                                {errors.title && <span style={{color:'black'}}>{errors.title.message}</span>}
-                            </>
-                        )}
-                    />
+                    <Input name={"title"} control={control} rules={{required:"Обязательное поле"}} label={"Название"}/>
                 </div>
                 <div className={styles.field}>
-                    <label>Текст:</label>
-                    <Controller
-                        name="text"
-                        control={control}
-                        rules={{ required: "Field is required" }}
-                        render={({ field }) => (
-                            <>
-                                <textarea className={styles.elForm} {...field} style={{resize:'vertical',overflowX: 'hidden'}} />
-                                {errors.title && <span style={{color:'black'}}>{errors.title.message}</span>}
-                            </>
-
-                        )}
-                    />
+                    <Input name={"text"} control={control} rules={{required:"Обязательное поле"}} label={"Текст статьи"}/>
                 </div>
                 <div className={styles.field}>
                     <label>Автор:</label>
@@ -105,7 +83,7 @@ const From : FC<FromProps> = ({article}) => {
                                         </option>
                                     ))}
                                 </select>
-                                {errors.title && <span style={{color:'black'}}>{errors.title.message}</span>}
+                                {errors.title && <span style={{color:'white', fontSize:'12px'}}>{errors.title.message}</span>}
                             </>
 
                         )}

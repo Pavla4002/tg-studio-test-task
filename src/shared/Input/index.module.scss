@@ -1,0 +1,14 @@
+@import '../../app/g-styles';
+
+.field{
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.elForm{
+  width: 400px;
+  height: 30px;
+  border-radius: $main-b-radius;
+  border: 1px solid $main-color;
+}
