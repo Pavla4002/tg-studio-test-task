@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import Layout from "../../../shared/Layout/Layout";
-import From from "../../../shared/Form";
+import From from "../../../shared/FormArticle";
 import styles from './index.module.scss'
 import ButtonLink from "../../../shared/ButtonLink/ButtonLink";
 import {useAppDispatch, useAppSelector} from "../../../hooks/hooks";
@@ -11,10 +11,9 @@ import {clearMessagesDemo} from "../../../store/demo/demoSlice/demoSlice";
 function AddArticle() {
     const dispatch = useAppDispatch();
     const demoStatus = useAppSelector((state:RootState) => state.demo.demo);
-    const articles = useAppSelector((state:RootState) => state.articles.articles)
     const articlesDemo = useAppSelector((state:RootState) => state.demo.articles);
     let messageAdd = useAppSelector((state:RootState) => demoStatus ? state.demo.addMessage : state.articles.addMessage);
-    console.log(articles)
+
     useEffect(() => {
         dispatch(fetchArticles());
         setTimeout(()=>{
@@ -38,6 +37,12 @@ function AddArticle() {
                     </div>
                 :
                     <Message text="В режиме 'Демо' можно создать лишь 3 статьи."/>
+            }
+            {
+                !demoStatus &&
+                <div className={styles.btnLinkAuthors}>
+                    <ButtonLink link={'/author/add'}>Добавить нового автора</ButtonLink>
+                </div>
             }
 
         </Layout>

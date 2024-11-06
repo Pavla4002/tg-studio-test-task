@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 
 import {useParams} from "react-router-dom";
-import Form from "../../../shared/Form";
+import Form from "../../../shared/FormArticle";
 import Layout from "../../../shared/Layout/Layout";
 import {useAppDispatch, useAppSelector} from "../../../hooks/hooks";
 import {RootState} from "../../../store/store";

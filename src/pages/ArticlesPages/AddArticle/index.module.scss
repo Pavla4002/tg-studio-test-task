@@ -6,7 +6,15 @@
     display: flex;
     justify-content: center;
 }
+
 .btnLink{
     width: 150px;
     margin-bottom: 20px;
+}
+
+.btnLinkAuthors{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    margin-top: 20px;
 }
