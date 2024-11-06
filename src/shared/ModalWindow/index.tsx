@@ -8,7 +8,7 @@ import {
     deleteArticleById,
 } from "../../store/articles/articlesSlice/articlesSlice";
 import {RootState} from "../../store/store";
-import {delArticleDemo} from "../../store/articles/demo/demoSlice";
+import {delArticleDemo} from "../../store/demo/demoSlice/demoSlice";
 
 
 

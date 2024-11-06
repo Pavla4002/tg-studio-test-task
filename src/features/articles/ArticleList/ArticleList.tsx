@@ -11,7 +11,7 @@ import ArticlesTable from "../ArticlesTable";
 import Message from "../../../shared/Message";
 import ButtonLink from "../../../shared/ButtonLink/ButtonLink";
 import ErrorMessage from "../../../shared/Error";
-import {clearMessagesDemo, startEndDemo} from "../../../store/articles/demo/demoSlice";
+import {clearMessagesDemo, startEndDemo} from "../../../store/demo/demoSlice/demoSlice";
 
 
 

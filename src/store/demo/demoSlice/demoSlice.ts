@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {Article} from "../articlesSlice/articlesSlice";
+import {Article} from "../../articles/articlesSlice/articlesSlice";
 
 
 

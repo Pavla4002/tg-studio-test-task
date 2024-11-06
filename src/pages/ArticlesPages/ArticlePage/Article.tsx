@@ -1,7 +1,7 @@
 import React from 'react';
-import ArticleDetail from "../../components/articles/ArticleDetail/ArticleDetail";
-import Layout from "../../components/layout/Layout";
-import ButtonLink from "../../shared/ButtonLink/ButtonLink";
+import ArticleDetail from "../../../features/articles/ArticleDetail/ArticleDetail";
+import Layout from "../../../shared/Layout/Layout";
+import ButtonLink from "../../../shared/ButtonLink/ButtonLink";
 import styles from './index.module.scss'
 
 

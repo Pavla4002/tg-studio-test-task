@@ -1,5 +1,5 @@
 import styles from './index.module.scss';
-import Layout from "../../components/layout/Layout";
+import Layout from "../../shared/Layout/Layout";
 
 function ErrorPage() {
     return (

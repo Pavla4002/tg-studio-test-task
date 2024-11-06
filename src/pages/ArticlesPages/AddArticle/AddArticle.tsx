@@ -1,13 +1,13 @@
 import React, {useEffect} from 'react';
-import Layout from "../../components/layout/Layout";
-import From from "../../shared/Form";
+import Layout from "../../../shared/Layout/Layout";
+import From from "../../../shared/Form";
 import styles from './index.module.scss'
-import ButtonLink from "../../shared/ButtonLink/ButtonLink";
-import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
-import {RootState} from "../../store/store";
-import {clearMessages, fetchArticles} from "../../store/articles/articlesSlice/articlesSlice";
-import Message from "../../shared/Message";
-import {clearMessagesDemo} from "../../store/articles/demo/demoSlice";
+import ButtonLink from "../../../shared/ButtonLink/ButtonLink";
+import {useAppDispatch, useAppSelector} from "../../../hooks/hooks";
+import {RootState} from "../../../store/store";
+import {clearMessages, fetchArticles} from "../../../store/articles/articlesSlice/articlesSlice";
+import Message from "../../../shared/Message";
+import {clearMessagesDemo} from "../../../store/demo/demoSlice/demoSlice";
 function AddArticle() {
     const dispatch = useAppDispatch();
     const demoStatus = useAppSelector((state:RootState) => state.demo.demo);

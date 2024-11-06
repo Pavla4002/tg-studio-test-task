@@ -1,10 +1,10 @@
 import React from 'react';
 import {Route, Routes} from 'react-router-dom';
-import Articles from "../../pages/Articles";
-import Article from "../../pages/ArticlePage/Article";
-import AddArticle from "../../pages/AddArticle/AddArticle";
+import Articles from "../../pages/ArticlesPages/AllArticles/Articles";
+import Article from "../../pages/ArticlesPages/ArticlePage/Article";
+import AddArticle from "../../pages/ArticlesPages/AddArticle/AddArticle";
 import ErrorPage from "../../pages/Error/ErrorPage";
-import EditArticle from "../../pages/EditArticle/EditArticle";
+import EditArticle from "../../pages/ArticlesPages/EditArticle/EditArticle";
 
 const RouterApp: React.FC = () => {
     return (

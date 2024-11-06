@@ -2,8 +2,8 @@ import React, {ReactNode} from 'react';
 import styles from './index.module.scss';
 import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
 import {RootState} from "../../store/store";
-import Button from "../../shared/Button";
-import {startEndDemo} from "../../store/articles/demo/demoSlice";
+import Button from "../Button";
+import {startEndDemo} from "../../store/demo/demoSlice/demoSlice";
 import {useNavigate} from "react-router-dom";
 
 

@@ -1,17 +1,17 @@
 import React, {useEffect} from 'react';
 
 import {useParams} from "react-router-dom";
-import Form from "../../shared/Form";
-import Layout from "../../components/layout/Layout";
-import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
-import {RootState} from "../../store/store";
-import {clearMessages, fetchArticleById} from "../../store/articles/articlesSlice/articlesSlice";
-import Load from "../../shared/Loading";
-import Message from "../../shared/Message";
-import ErrorMessage from "../../shared/Error";
+import Form from "../../../shared/Form";
+import Layout from "../../../shared/Layout/Layout";
+import {useAppDispatch, useAppSelector} from "../../../hooks/hooks";
+import {RootState} from "../../../store/store";
+import {clearMessages, fetchArticleById} from "../../../store/articles/articlesSlice/articlesSlice";
+import Load from "../../../shared/Loading";
+import Message from "../../../shared/Message";
+import ErrorMessage from "../../../shared/Error";
 import styles from "../AddArticle/index.module.scss";
-import ButtonLink from "../../shared/ButtonLink/ButtonLink";
-import {clearMessagesDemo} from "../../store/articles/demo/demoSlice";
+import ButtonLink from "../../../shared/ButtonLink/ButtonLink";
+import {clearMessagesDemo} from "../../../store/demo/demoSlice/demoSlice";
 
 function EditArticle() {
     const { id } = useParams<{ id: string }>();

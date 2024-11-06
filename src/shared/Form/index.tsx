@@ -3,10 +3,10 @@ import {addArticle, Article, editArticle} from "../../store/articles/articlesSli
 import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
 import {Controller, SubmitHandler, useForm} from "react-hook-form";
 import {RootState} from "../../store/store";
-import {fetchAuthors} from "../../store/articles/articlesSlice/authorSlice";
+import {fetchAuthors} from "../../store/authors/authorsSlice/authorSlice";
 import styles from './index.module.scss'
 import Button from "../Button";
-import {addArticleDemo, editArticleDemo} from "../../store/articles/demo/demoSlice";
+import {addArticleDemo, editArticleDemo} from "../../store/demo/demoSlice/demoSlice";
 
 interface FromProps{
     article?: Article,

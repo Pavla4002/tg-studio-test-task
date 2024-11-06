@@ -1,6 +1,6 @@
 import React from 'react';
-import ArticleList from "../components/articles/ArticleList/ArticleList";
-import Layout from "../components/layout/Layout";
+import ArticleList from "../../../features/articles/ArticleList/ArticleList";
+import Layout from "../../../shared/Layout/Layout";
 
 function Articles() {
     return (

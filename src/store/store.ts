@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import articlesReducer from './articles/articlesSlice/articlesSlice';
-import authorSlice from "./articles/articlesSlice/authorSlice";
-import demoSlice from "./articles/demo/demoSlice";
+import authorSlice from "./authors/authorsSlice/authorSlice";
+import demoSlice from "./demo/demoSlice/demoSlice";
 
 const store = configureStore({
     reducer: {
