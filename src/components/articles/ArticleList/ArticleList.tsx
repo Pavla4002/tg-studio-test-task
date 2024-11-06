@@ -1,6 +1,6 @@
 import React, { useEffect} from 'react';
 import {useAppDispatch, useAppSelector} from '../../../hooks/hooks';
-import {Article, clearMessages, fetchArticles, openModal} from '../../../store/articles/articlesSlice/articlesSlice';
+import {clearMessages, fetchArticles} from '../../../store/articles/articlesSlice/articlesSlice';
 import { RootState } from '../../../store/store';
 import Button from "../../../shared/Button";
 import styles from './index.module.scss';

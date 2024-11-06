@@ -129,7 +129,7 @@ const articlesSlice = createSlice({
             })
             .addCase(deleteArticleById.fulfilled, (state, action) => {
                 state.status = 'succeeded';
-                state.articles = state.articles .filter(article => article.id!== Number(action.payload))
+                state.articles = state.articles.filter(article => article.id!== Number(action.payload))
                 state.delMessage = 'Статья успешно удалена';
             })
             .addCase(deleteArticleById.rejected, (state, action) => {
@@ -140,7 +140,7 @@ const articlesSlice = createSlice({
             .addCase(addArticle.pending, (state) => {
                 state.status = 'loading';
             })
-            .addCase(addArticle.fulfilled, (state, action) => {
+            .addCase(addArticle.fulfilled, (state) => {
                 state.status = 'succeeded';
                 state.addMessage = 'Статья успешно добавлена'
             })

@@ -3,7 +3,6 @@ import articlesReducer from './articles/articlesSlice/articlesSlice';
 import authorSlice from "./articles/articlesSlice/authorSlice";
 import demoSlice from "./articles/demo/demoSlice";
 
-console.log('init')
 const store = configureStore({
     reducer: {
         articles: articlesReducer,

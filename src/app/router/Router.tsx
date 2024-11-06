@@ -1,7 +1,7 @@
 import React from 'react';
 import {Route, Routes} from 'react-router-dom';
 import Articles from "../../pages/Articles";
-import Article from "../../pages/ArticalPage/Article";
+import Article from "../../pages/ArticlePage/Article";
 import AddArticle from "../../pages/AddArticle/AddArticle";
 import ErrorPage from "../../pages/Error/ErrorPage";
 import EditArticle from "../../pages/EditArticle/EditArticle";

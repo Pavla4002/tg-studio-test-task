@@ -12,7 +12,6 @@ interface FromProps{
     article?: Article,
 }
 const From : FC<FromProps> = ({article}) => {
-    console.log('article',article)
     const dispatch = useAppDispatch();
     const demoStatus = useAppSelector((state:RootState) => state.demo.demo);
     const authors = useAppSelector((state:RootState) => state.authors.authors);
@@ -20,10 +19,10 @@ const From : FC<FromProps> = ({article}) => {
         defaultValues: {
             title: '',
             text: '',
-            author_id: undefined,
+            author_id: "",
         },
     });
-    console.log(article)
+
     useEffect(() => {
         if (article) {
             setValue('title', article.title);
@@ -42,8 +41,8 @@ const From : FC<FromProps> = ({article}) => {
                 dispatch(editArticle({ id:article.id, title:data.title, text:data.text, author_id: Number(data.author_id) }));
             } else {
                 dispatch(addArticle({title:data.title, text:data.text, author_id: Number(data.author_id)}));
+                reset({ title: '', text: '', author_id: "" });
             }
-            reset({ title: '', text: '', author_id: '0' });
         }else{
             if (article) {
                 const author = authors.find(author => author.id === Number(data.author_id));
@@ -51,9 +50,9 @@ const From : FC<FromProps> = ({article}) => {
             }else{
                 const author = authors.find(author => author.id === Number(data.author_id));
                 dispatch(addArticleDemo(
-                    {id:Date.now(),title:data.title, text:data.text, author_id: Number(data.author_id), author: {id: Number(data.author_id), name: author!.name}}));
+                {id:Date.now(),title:data.title, text:data.text, author_id: Number(data.author_id), author: {id: Number(data.author_id), name: author!.name}}));
+                reset({ title: '', text: '', author_id: "" });
             }
-            reset({ title: '', text: '', author_id: '0' });
         }
     }
 
@@ -72,7 +71,6 @@ const From : FC<FromProps> = ({article}) => {
                                 <input className={styles.elForm} type="text" {...field} />
                                 {errors.title && <span style={{color:'black'}}>{errors.title.message}</span>}
                             </>
-
                         )}
                     />
                 </div>
@@ -99,7 +97,7 @@ const From : FC<FromProps> = ({article}) => {
                         rules={{ required: "Field is required"  }}
                         render={({ field }) => (
                             <>
-                                <select {...field} className={styles.elForm} value={field.value || ""}>
+                                <select {...field} className={styles.elForm} value={field.value ?? ""}>
                                     <option value="" disabled>Выберите автора</option>
                                     {authors.map((author) => (
                                         <option key={author.id} value={author.id}>

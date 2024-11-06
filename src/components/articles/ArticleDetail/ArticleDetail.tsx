@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react';
-import {useSelector } from 'react-redux';
 import {useAppDispatch, useAppSelector} from '../../../hooks/hooks';
 import {fetchArticleById} from '../../../store/articles/articlesSlice/articlesSlice';
 import { RootState } from '../../../store/store';
