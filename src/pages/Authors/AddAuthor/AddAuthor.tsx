@@ -25,7 +25,10 @@ function AddAuthor() {
                 {messageAdd!=='' && <Message text={messageAdd}/>}
             </div>
             <div className={styles.btnLink}>
-                <ButtonLink link={'/'}>Все статьи</ButtonLink>
+                <div className={styles.links}>
+                    <ButtonLink link={'/'}>Все статьи</ButtonLink>
+                    <ButtonLink link={'/article/add'}>Новая статья</ButtonLink>
+                </div>
             </div>
             <div className={styles.formArea}>
                 <FormAuthors/>
