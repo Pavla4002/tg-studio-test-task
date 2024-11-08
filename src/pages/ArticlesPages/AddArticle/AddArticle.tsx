@@ -41,6 +41,7 @@ function AddArticle() {
             {
                 !demoStatus &&
                 <div className={styles.btnLinkAuthors}>
+                    <span className={styles.newAythor}>Если авторов нет, то вы можете добавить нового: </span>
                     <ButtonLink link={'/author/add'}>Добавить нового автора</ButtonLink>
                 </div>
             }

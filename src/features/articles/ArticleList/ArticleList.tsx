@@ -62,7 +62,7 @@ const ArticleList: React.FC = () => {
                                     {articles.length>0 ?
                                         <ArticlesTable articles={articles}/>
                                         :
-                                        <div className={styles.noDataBlock}><span>Нет данных для отображения.</span></div>
+                                        <div className={styles.noDataBlock}><span>Нет данных для отображения. Вы можете добавить новые статьи.</span></div>
                                     }
                         </div>)
                         :
