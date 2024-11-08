@@ -27,14 +27,14 @@ function EditArticle() {
         if (!demoStatus){
             dispatch(fetchArticleById(Number(id)));
         }
-    }, []);
+    }, [demoStatus, dispatch, id]);
 
     useEffect(() => {
         setTimeout(()=>{
             dispatch(clearMessages());
             dispatch(clearMessagesDemo());
         },5000)
-    }, [message]);
+    }, [message,dispatch]);
 
 
     return (

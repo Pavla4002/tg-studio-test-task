@@ -17,7 +17,7 @@ function AddAuthor() {
         setTimeout(()=>{
             dispatch(resetMessage());
         },5000)
-    }, [messageAdd]);
+    }, [messageAdd,dispatch]);
 
     return (
         <Layout>

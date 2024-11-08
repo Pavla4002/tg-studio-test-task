@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import {Article} from "../../store/articles/articlesSlice/articlesSlice";
 import {useAppDispatch} from "../../hooks/hooks";
-import {Controller, SubmitHandler, useForm} from "react-hook-form";
+import {SubmitHandler, useForm} from "react-hook-form";
 import styles from './index.module.scss'
 import Button from "../Button";
 import {addAuthors} from "../../store/authors/authorsSlice/authorSlice";
@@ -11,9 +11,9 @@ import Input, {FormDataAuthor} from "../Input/Input";
 interface FromProps{
     article?: Article,
 }
-const FromAuthors : FC<FromProps> = ({}) => {
+const FromAuthors : FC<FromProps> = () => {
     const dispatch = useAppDispatch();
-    const { control, handleSubmit, reset,  formState: { errors }} = useForm<FormDataAuthor>({
+    const { control, handleSubmit, reset} = useForm<FormDataAuthor>({
         defaultValues: {
             name:''
         },
