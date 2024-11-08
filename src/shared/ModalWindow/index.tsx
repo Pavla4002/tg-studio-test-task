@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React from 'react';
 import styles from './index.module.scss';
 import Button from "../Button";
 import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
@@ -11,12 +11,12 @@ import {RootState} from "../../store/store";
 import {delArticleDemo} from "../../store/demo/demoSlice/demoSlice";
 
 
-
 interface ModalWindowProps {
     articleModal: Article | null;
     status: boolean;
 }
-const ModalWindow : FC<ModalWindowProps> = ({articleModal, status=false}) => {
+
+function ModalWindow({articleModal, status=false}:ModalWindowProps){
     const dispatch = useAppDispatch();
     const demoStatus = useAppSelector((state:RootState) => state.demo.demo);
     const closeModalFunc = () => {

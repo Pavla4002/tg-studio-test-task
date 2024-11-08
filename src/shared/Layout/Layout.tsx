@@ -12,7 +12,7 @@ interface LayoutProps {
 }
 
 
-const Layout: React.FC<LayoutProps> = ({ children }) => {
+function Layout ({ children }:LayoutProps){
     const dispatch = useAppDispatch();
     const demoStatus = useAppSelector((state: RootState) => state.demo.demo);
     const navigate = useNavigate();
@@ -29,6 +29,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         </>
 
     );
-};
+}
 
 export default Layout;

@@ -1,9 +1,9 @@
-import React, {FC} from 'react';
+import React from 'react';
 import styles from './index.module.scss';
 interface ErrorProps{
     textError: string | null;
 }
-const ErrorMessage : FC<ErrorProps> = ({textError}) => {
+function ErrorMessage ({textError}:ErrorProps){
     return (
         <div className={styles.errorArea}>
             <div className={styles.errorContent}>

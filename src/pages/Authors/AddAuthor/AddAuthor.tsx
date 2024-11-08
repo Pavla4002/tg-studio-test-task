@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import FromAuthors from "../../../shared/FormAutors";
+import FormAuthors from "../../../shared/FormAutors";
 import Layout from "../../../shared/Layout/Layout";
 import {useAppDispatch, useAppSelector} from "../../../hooks/hooks";
 import {RootState} from "../../../store/store";
@@ -28,7 +28,7 @@ function AddAuthor() {
                 <ButtonLink link={'/'}>Все статьи</ButtonLink>
             </div>
             <div className={styles.formArea}>
-                <FromAuthors/>
+                <FormAuthors/>
             </div>
         </Layout>
     );

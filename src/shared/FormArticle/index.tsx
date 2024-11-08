@@ -1,4 +1,4 @@
-import React, {FC, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {addArticle, Article, editArticle} from "../../store/articles/articlesSlice/articlesSlice";
 import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
 import {Controller, SubmitHandler, useForm} from "react-hook-form";
@@ -12,7 +12,7 @@ import Input, {FormDataArticles} from "../Input/Input";
 interface FromProps{
     article?: Article,
 }
-const From : FC<FromProps> = ({article}) => {
+function From ({article}:FromProps){
     const dispatch = useAppDispatch();
     const demoStatus = useAppSelector((state:RootState) => state.demo.demo);
     const authors = useAppSelector((state:RootState) => state.authors.authors);

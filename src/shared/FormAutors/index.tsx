@@ -1,5 +1,4 @@
-import React, {FC} from 'react';
-import {Article} from "../../store/articles/articlesSlice/articlesSlice";
+import React from 'react';
 import {useAppDispatch} from "../../hooks/hooks";
 import {SubmitHandler, useForm} from "react-hook-form";
 import styles from './index.module.scss'
@@ -8,10 +7,8 @@ import {addAuthors} from "../../store/authors/authorsSlice/authorSlice";
 import Input, {FormDataAuthor} from "../Input/Input";
 
 
-interface FromProps{
-    article?: Article,
-}
-const FromAuthors : FC<FromProps> = () => {
+
+function FormAuthors (){
     const dispatch = useAppDispatch();
     const { control, handleSubmit, reset} = useForm<FormDataAuthor>({
         defaultValues: {
@@ -39,4 +36,4 @@ const FromAuthors : FC<FromProps> = () => {
     );
 }
 
-export default FromAuthors;
+export default FormAuthors;
